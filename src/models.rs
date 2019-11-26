@@ -18,8 +18,6 @@
 
 use std::time::SystemTime;
 
-#[derive(Insertable, Queryable)]
-#[table_name = "consortium_user"]
 pub struct ConsortiumUser {
     pub email: String,
     pub public_key: String,
@@ -27,9 +25,6 @@ pub struct ConsortiumUser {
     pub hashed_password: String,
 }
 
-#[derive(Insertable, Queryable, Identifiable, PartialEq, Debug)]
-#[table_name = "consortium"]
-#[primary_key(circuit_id)]
 pub struct Consortium {
     pub circuit_id: String,
     pub authorization_type: String,
@@ -43,9 +38,6 @@ pub struct Consortium {
     pub updated_time: SystemTime,
 }
 
-#[derive(Queryable, Identifiable, Associations, PartialEq, Debug)]
-#[table_name = "consortium_proposal"]
-#[belongs_to(Consortium, foreign_key = "circuit_id")]
 pub struct ConsortiumProposal {
     pub id: i64,
     pub proposal_type: String,
@@ -58,8 +50,6 @@ pub struct ConsortiumProposal {
     pub updated_time: SystemTime,
 }
 
-#[derive(Insertable, PartialEq, Debug)]
-#[table_name = "consortium_proposal"]
 pub struct NewConsortiumProposal {
     pub proposal_type: String,
     pub circuit_id: String,
@@ -71,9 +61,6 @@ pub struct NewConsortiumProposal {
     pub updated_time: SystemTime,
 }
 
-#[derive(Queryable, Identifiable, Associations, PartialEq, Debug)]
-#[table_name = "proposal_vote_record"]
-#[belongs_to(ConsortiumProposal, foreign_key = "proposal_id")]
 pub struct ProposalVoteRecord {
     pub id: i64,
     pub proposal_id: i64,
@@ -83,8 +70,6 @@ pub struct ProposalVoteRecord {
     pub created_time: SystemTime,
 }
 
-#[derive(Insertable, PartialEq, Debug)]
-#[table_name = "proposal_vote_record"]
 pub struct NewProposalVoteRecord {
     pub proposal_id: i64,
     pub voter_public_key: String,
@@ -93,9 +78,6 @@ pub struct NewProposalVoteRecord {
     pub created_time: SystemTime,
 }
 
-#[derive(Queryable, Identifiable, Associations, PartialEq, Debug)]
-#[table_name = "consortium_member"]
-#[belongs_to(Consortium, foreign_key = "circuit_id")]
 pub struct ConsortiumMember {
     pub id: i64,
     pub circuit_id: String,
@@ -106,8 +88,6 @@ pub struct ConsortiumMember {
     pub updated_time: SystemTime,
 }
 
-#[derive(Insertable, PartialEq, Debug)]
-#[table_name = "consortium_member"]
 pub struct NewConsortiumMember {
     pub circuit_id: String,
     pub node_id: String,
@@ -117,9 +97,6 @@ pub struct NewConsortiumMember {
     pub updated_time: SystemTime,
 }
 
-#[derive(Queryable, Identifiable, Associations, PartialEq, Debug)]
-#[table_name = "consortium_service"]
-#[belongs_to(Consortium, foreign_key = "circuit_id")]
 pub struct ConsortiumService {
     pub id: i64,
     pub circuit_id: String,
@@ -132,8 +109,6 @@ pub struct ConsortiumService {
     pub updated_time: SystemTime,
 }
 
-#[derive(Insertable, PartialEq, Debug)]
-#[table_name = "consortium_service"]
 pub struct NewConsortiumService {
     pub circuit_id: String,
     pub service_id: String,
@@ -145,8 +120,6 @@ pub struct NewConsortiumService {
     pub updated_time: SystemTime,
 }
 
-#[derive(Queryable, Identifiable, Associations)]
-#[table_name = "consortium_notification"]
 pub struct ConsortiumNotification {
     pub id: i64,
     pub notification_type: String,
@@ -157,8 +130,6 @@ pub struct ConsortiumNotification {
     pub read: bool,
 }
 
-#[derive(Debug, Insertable)]
-#[table_name = "consortium_notification"]
 pub struct NewConsortiumNotification {
     pub notification_type: String,
     pub requester: String,
@@ -168,7 +139,6 @@ pub struct NewConsortiumNotification {
     pub read: bool,
 }
 
-#[derive(Queryable, PartialEq, Debug)]
 pub struct ActiveConsortium {
     pub circuit_id: String,
     pub service_id: String,
