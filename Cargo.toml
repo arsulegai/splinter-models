@@ -1,4 +1,5 @@
 # Copyright 2019 Cargill Incorporated
+# Copyright 2019 Walmart Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +14,11 @@
 # limitations under the License.
 
 [package]
-name = "gameroom-database"
+name = "db-models"
 version = "0.3.6"
-authors = ["Cargill Incorporated"]
+authors = ["Cargill Incorporated", "Walmart Inc."]
 edition = "2018"
 license = "Apache-2.0"
 
 [dependencies]
-diesel = { version = "1.0.0", features = ["postgres", "r2d2", "serde_json"] }
 serde_json = "1.0"
